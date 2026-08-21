@@ -1,12 +1,14 @@
 [build]
   command = "npm run build"
-  # Do NOT set publish to ".next" — that makes Netlify serve a static folder
-  # (no index.html) and causes "Page not found". Next.js on Netlify uses the
-  # OpenNext adapter and publishes through Functions + CDN automatically.
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "22"
   NEXT_TELEMETRY_DISABLED = "1"
+
+# Required so Netlify runs Next.js via OpenNext (not as a plain static site).
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 [[headers]]
   for = "/admin.html"
