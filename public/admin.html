@@ -382,6 +382,15 @@
             ${field("B站", "site.bilibili", s.bilibili)}
           </div>
           ${field("小红书", "site.xiaohongshu", s.xiaohongshu)}
+          <div class="row">
+            ${field("闲鱼 / 小黄鱼链接", "site.xianyu", s.xianyu || "")}
+            ${field("闲鱼口令", "site.xianyuCode", s.xianyuCode || "")}
+          </div>
+          <div class="row3">
+            ${field("抖音链接", "site.douyin", s.douyin || "")}
+            ${field("抖音号", "site.douyinId", s.douyinId || "")}
+            ${field("抖音口令", "site.douyinCode", s.douyinCode || "")}
+          </div>
           <div class="row3">
             ${field("所在地", "site.basedIn", s.basedIn)}
             ${field("当前", "site.currently", s.currently)}

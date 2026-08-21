@@ -46,6 +46,39 @@ export function Footer() {
           >
             小红书
           </a>
+          {site.xianyu ? (
+            <a
+              href={site.xianyu}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={
+                site.xianyuCode ? `打开后口令：${site.xianyuCode}` : undefined
+              }
+              className="focus-ring transition-colors hover:text-[var(--text)]"
+            >
+              小黄鱼
+              {site.xianyuCode ? (
+                <span className="ml-1 text-[11px] text-[var(--text-muted)]">
+                  {site.xianyuCode}
+                </span>
+              ) : null}
+            </a>
+          ) : null}
+          {site.douyin ? (
+            <a
+              href={site.douyin}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={
+                site.douyinId
+                  ? `抖音号 ${site.douyinId}${site.douyinCode ? ` · 口令 ${site.douyinCode}` : ""}`
+                  : undefined
+              }
+              className="focus-ring transition-colors hover:text-[var(--text)]"
+            >
+              抖音
+            </a>
+          ) : null}
           <span className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.14em] text-[var(--status-green)]">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--status-green)]" />
             在线

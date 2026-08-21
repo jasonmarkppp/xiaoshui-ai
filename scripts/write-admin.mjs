@@ -388,6 +388,15 @@ const html = `<!DOCTYPE html>
             \${field("B\u7ad9", "site.bilibili", s.bilibili)}
           </div>
           \${field("\u5c0f\u7ea2\u4e66", "site.xiaohongshu", s.xiaohongshu)}
+          <div class="row">
+            \${field("\u95f2\u9c7c / \u5c0f\u9ec4\u9c7c\u94fe\u63a5", "site.xianyu", s.xianyu || "")}
+            \${field("\u95f2\u9c7c\u53e3\u4ee4", "site.xianyuCode", s.xianyuCode || "")}
+          </div>
+          <div class="row3">
+            \${field("\u6296\u97f3\u94fe\u63a5", "site.douyin", s.douyin || "")}
+            \${field("\u6296\u97f3\u53f7", "site.douyinId", s.douyinId || "")}
+            \${field("\u6296\u97f3\u53e3\u4ee4", "site.douyinCode", s.douyinCode || "")}
+          </div>
           <div class="row3">
             \${field("\u6240\u5728\u5730", "site.basedIn", s.basedIn)}
             \${field("\u5f53\u524d", "site.currently", s.currently)}
