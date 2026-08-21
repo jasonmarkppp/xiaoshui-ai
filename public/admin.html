@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>小氵AI · 可视化后台</title>
+  <style>
+    :root {
+      --bg: #09090b;
+      --panel: #121216;
+      --panel2: #17171c;
+      --border: #2a2a30;
+      --text: #fafafa;
+      --muted: #a1a1aa;
+      --accent: #5b8cff;
+      --ok: #a3e635;
+      --err: #fb7185;
+      --danger: #e11d48;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(900px 500px at 8% -10%, rgba(91,140,255,.14), transparent 55%),
+        radial-gradient(700px 400px at 100% 0%, rgba(163,230,53,.06), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    header {
+      position: sticky; top: 0; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(9,9,11,.88);
+      backdrop-filter: blur(12px);
+    }
+    header .left { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    header h1 { margin: 0; font-size: 15px; white-space: nowrap; }
+    header .sub { color: var(--muted); font-size: 12px; }
+    .banner {
+      margin: 0 0 14px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(91,140,255,.35);
+      background: rgba(91,140,255,.1);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+    header a { color: var(--muted); text-decoration: none; font-size: 13px; }
+    header a:hover { color: var(--text); }
+    .savebar {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    main { max-width: 1080px; margin: 0 auto; padding: 18px 14px 100px; }
+    .tabs {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 16px;
+      position: sticky; top: 58px; z-index: 15;
+      padding: 8px 0;
+      background: linear-gradient(var(--bg), rgba(9,9,11,.92));
+    }
+    .tabs button {
+      background: var(--panel); border: 1px solid var(--border); border-radius: 999px;
+      padding: 8px 13px; cursor: pointer; color: var(--muted); font-size: 12px;
+    }
+    .tabs button.active {
+      color: var(--text); border-color: var(--accent);
+      background: rgba(91,140,255,.14);
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+    .card.item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 14px;
+      background: var(--panel2);
+    }
+    @media (max-width: 720px) {
+      .card.item { grid-template-columns: 1fr; }
+    }
+    .thumb {
+      width: 100%; aspect-ratio: 16/10; object-fit: cover;
+      border-radius: 10px; border: 1px solid var(--border); background: #0c0c10;
+    }
+    .thumb-wrap { display: flex; flex-direction: column; gap: 8px; }
+    .upload-row { display: flex; gap: 8px; align-items: center; }
+    .upload-row input[type="text"] { flex: 1; min-width: 0; }
+    .file-btn { position: relative; overflow: hidden; flex-shrink: 0; }
+    .file-btn input[type="file"] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+    }
+    .gallery-previews {
+      display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 4px;
+    }
+    .gallery-previews img {
+      width: 64px; height: 40px; object-fit: cover; border-radius: 6px;
+      border: 1px solid var(--border); background: #0c0c10;
+    }
+    label { display: block; font-size: 11px; color: var(--muted); margin: 8px 0 5px; letter-spacing: .04em; }
+    input, textarea, select, button { font: inherit; color: var(--text); }
+    input, textarea, select {
+      width: 100%;
+      background: #0c0c10;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 9px 11px;
+      outline: none;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--accent); }
+    textarea { min-height: 72px; resize: vertical; line-height: 1.5; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    @media (max-width: 720px) {
+      .row, .row3 { grid-template-columns: 1fr; }
+    }
+    .btn {
+      border: 0; border-radius: 10px; padding: 9px 14px; cursor: pointer;
+      background: var(--accent); color: #fff; font-weight: 600; font-size: 13px;
+    }
+    .btn.ghost {
+      background: transparent; border: 1px solid var(--border);
+      color: var(--text); font-weight: 500;
+    }
+    .btn.danger {
+      background: transparent; border: 1px solid rgba(225,29,72,.45);
+      color: #fb7185;
+    }
+    .btn.sm { padding: 6px 10px; font-size: 12px; }
+    .item-actions {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;
+    }
+    .section-head {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px; margin-bottom: 12px;
+    }
+    .section-head h2 { margin: 0; font-size: 15px; }
+    #msg { font-size: 12px; color: var(--muted); min-width: 8ch; }
+    #msg.ok { color: var(--ok); }
+    #msg.err { color: var(--err); }
+    .hidden { display: none !important; }
+    .hint { font-size: 12px; color: var(--muted); line-height: 1.55; margin: 0 0 10px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid var(--border); border-radius: 999px;
+      padding: 4px 10px; font-size: 11px; color: var(--muted);
+    }
+    .list-lines textarea { min-height: 140px; }
+    .check {
+      display: flex; align-items: center; gap: 8px;
+      margin-top: 18px; color: var(--muted); font-size: 13px;
+    }
+    .check input { width: auto; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="left">
+      <h1>小氵AI · 后台</h1>
+      <span class="sub">可视化编辑 · 无密码</span>
+    </div>
+    <div class="savebar">
+      <span id="msg"></span>
+      <button class="btn ghost" id="btnReload" type="button">重载</button>
+      <button class="btn" id="btnSave" type="button">保存到前台</button>
+      <a href="/" target="_blank">查看前台 →</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="banner">
+      本地可保存与上传。部署到 Netlify 后，请在本地改好内容，提交 <code>content/store.json</code> 与 <code>public</code> 图片再部署。
+    </div>
+    <div class="tabs" id="tabs"></div>
+    <div id="panels"></div>
+  </main>
+
+  <script>
+    const STATUS = ["SHIPPED","BUILDING","EXPERIMENT","OPEN SOURCE","ARCHIVED","CLIENT","PRIVATE"];
+    const KINDS = [
+      { id: "campus", label: "校园单" },
+      { id: "small-site", label: "小网站" },
+      { id: "enterprise", label: "企业站" },
+      { id: "commerce", label: "电商业务" },
+      { id: "series", label: "系列" },
+    ];
+    const TABS = [
+      { id: "site", label: "站点" },
+      { id: "hero", label: "Hero" },
+      { id: "about", label: "关于 / NOW" },
+      { id: "projects", label: "精选作品" },
+      { id: "commissions", label: "交付项目" },
+      { id: "lab", label: "LAB" },
+      { id: "logs", label: "日志" },
+    ];
+
+    let store = null;
+    let activeTab = localStorage.getItem("xiaoshui_admin_tab") || "site";
+
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
+
+    function setMsg(text, type = "") {
+      const el = $("msg");
+      el.textContent = text || "";
+      el.className = type;
+    }
+
+    function field(label, path, value, opts = {}) {
+      const id = "f_" + path.replace(/[^a-zA-Z0-9]/g, "_");
+      if (opts.type === "textarea") {
+        return `<label for="${id}">${label}</label><textarea id="${id}" data-path="${path}" rows="${opts.rows || 3}">${esc(value)}</textarea>`;
+      }
+      if (opts.type === "select") {
+        const options = (opts.options || []).map((o) => {
+          const v = typeof o === "string" ? o : o.id;
+          const t = typeof o === "string" ? o : o.label;
+          return `<option value="${esc(v)}" ${String(v) === String(value) ? "selected" : ""}>${esc(t)}</option>`;
+        }).join("");
+        return `<label for="${id}">${label}</label><select id="${id}" data-path="${path}">${options}</select>`;
+      }
+      if (opts.type === "checkbox") {
+        return `<label class="check"><input id="${id}" data-path="${path}" type="checkbox" ${value ? "checked" : ""} /> ${label}</label>`;
+      }
+      return `<label for="${id}">${label}</label><input id="${id}" data-path="${path}" type="${opts.type || "text"}" value="${esc(value)}" />`;
+    }
+
+    function thumb(src) {
+      const url = src || "";
+      return `<img class="thumb" src="${esc(url)}" alt="" onerror="this.style.opacity=.25" />`;
+    }
+
+    function imageField(label, path, value, folder) {
+      const id = "f_" + path.replace(/[^a-zA-Z0-9]/g, "_");
+      return `
+        <label for="${id}">${label}</label>
+        <div class="upload-row">
+          <input id="${id}" data-path="${path}" type="text" value="${esc(value || "")}" placeholder="/${folder}/xxx.png" />
+          <label class="btn ghost sm file-btn">上传
+            <input type="file" accept="image/*" data-upload-to="${path}" data-folder="${folder}" />
+          </label>
+        </div>
+      `;
+    }
+
+    function galleryField(label, path, value, folder) {
+      const lines = (value || []).filter(Boolean);
+      const previews = lines.map((u) => `<img src="${esc(u)}" alt="" onerror="this.style.opacity=.25" />`).join("");
+      return `
+        <label>${label}</label>
+        <div class="gallery-previews" data-gallery-for="${path}">${previews}</div>
+        <textarea data-path="${path}" rows="4" placeholder="/${folder}/a.png">${esc(lines.join("\n"))}</textarea>
+        <div class="item-actions">
+          <label class="btn ghost sm file-btn">+上传到图集
+            <input type="file" accept="image/*" multiple data-upload-gallery="${path}" data-folder="${folder}" />
+          </label>
+        </div>
+      `;
+    }
+
+    async function uploadFile(file, folder) {
+      const form = new FormData();
+      form.append("file", file);
+      form.append("folder", folder || "uploads");
+      const res = await fetch("/api/admin/upload", { method: "POST", body: form });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error || "上传失败");
+      return data.url;
+    }
+
+    function refreshGalleryPreview(path) {
+      const ta = document.querySelector(`textarea[data-path="${path}"]`);
+      const box = document.querySelector(`[data-gallery-for="${path}"]`);
+      if (!ta || !box) return;
+      const lines = ta.value.split("\n").map((x) => x.trim()).filter(Boolean);
+      box.innerHTML = lines.map((u) => `<img src="${esc(u)}" alt="" onerror="this.style.opacity=.25" />`).join("");
+    }
+
+    function bindUploads(root) {
+      root.querySelectorAll("input[type=file][data-upload-to]").forEach((input) => {
+        input.addEventListener("change", async () => {
+          const file = input.files && input.files[0];
+          if (!file) return;
+          const path = input.dataset.uploadTo;
+          const folder = input.dataset.folder || "uploads";
+          try {
+            setMsg("上传中…");
+            const url = await uploadFile(file, folder);
+            const target = document.querySelector(`[data-path="${path}"]`);
+            if (target) {
+              target.value = url;
+              target.dispatchEvent(new Event("input", { bubbles: true }));
+            }
+            const card = input.closest(".card.item");
+            const img = card && card.querySelector("img.thumb");
+            if (img) { img.src = url; img.style.opacity = "1"; }
+            setMsg("图片已上传", "ok");
+          } catch (err) {
+            setMsg(err.message || "上传失败", "err");
+          } finally {
+            input.value = "";
+          }
+        });
+      });
+
+      root.querySelectorAll("input[type=file][data-upload-gallery]").forEach((input) => {
+        input.addEventListener("change", async () => {
+          const files = Array.from(input.files || []);
+          if (!files.length) return;
+          const path = input.dataset.uploadGallery;
+          const folder = input.dataset.folder || "uploads";
+          try {
+            setMsg("上传中…");
+            const urls = [];
+            for (const file of files) urls.push(await uploadFile(file, folder));
+            const ta = document.querySelector(`textarea[data-path="${path}"]`);
+            if (ta) {
+              const prev = ta.value.trim();
+              ta.value = [prev, ...urls].filter(Boolean).join("\n");
+              refreshGalleryPreview(path);
+            }
+            setMsg("已添加 " + urls.length + " 张图", "ok");
+          } catch (err) {
+            setMsg(err.message || "上传失败", "err");
+          } finally {
+            input.value = "";
+          }
+        });
+      });
+
+      root.querySelectorAll("textarea[data-path$='.images']").forEach((ta) => {
+        ta.addEventListener("input", () => refreshGalleryPreview(ta.dataset.path));
+      });
+    }
+
+    function renderTabs() {
+      $("tabs").innerHTML = TABS.map((t) =>
+        `<button type="button" data-tab="${t.id}" class="${t.id === activeTab ? "active" : ""}">${t.label}</button>`
+      ).join("");
+      $("tabs").querySelectorAll("button").forEach((btn) => {
+        btn.onclick = () => {
+          activeTab = btn.dataset.tab;
+          localStorage.setItem("xiaoshui_admin_tab", activeTab);
+          render();
+        };
+      });
+    }
+
+    function renderSite() {
+      const s = store.site;
+      return `
+        <div class="card">
+          <div class="section-head"><h2>站点信息</h2><span class="chip">前台品牌 / SEO</span></div>
+          <div class="row">
+            ${field("站点名称", "site.name", s.name)}
+            ${field("页面标题", "site.title", s.title)}
+          </div>
+          ${field("描述", "site.description", s.description, { type: "textarea", rows: 3 })}
+          <div class="row">
+            ${field("标语行 1", "site.taglineLines.0", s.taglineLines?.[0])}
+            ${field("标语行 2", "site.taglineLines.1", s.taglineLines?.[1])}
+          </div>
+          ${field("英文副标", "site.english", s.english)}
+          <div class="row3">
+            ${field("邮箱", "site.email", s.email)}
+            ${field("最近更新", "site.lastUpdated", s.lastUpdated)}
+            ${field("站点 URL", "site.url", s.url)}
+          </div>
+          <div class="row">
+            ${field("GitHub", "site.github", s.github)}
+            ${field("B站", "site.bilibili", s.bilibili)}
+          </div>
+          ${field("小红书", "site.xiaohongshu", s.xiaohongshu)}
+          <div class="row3">
+            ${field("所在地", "site.basedIn", s.basedIn)}
+            ${field("当前", "site.currently", s.currently)}
+            ${field("关注方向", "site.interestedIn", s.interestedIn)}
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-head"><h2>导航</h2>
+            <button class="btn ghost sm" type="button" data-action="add-nav">+添加</button>
+          </div>
+          ${(store.navLinks || []).map((link, i) => `
+            <div class="card item" style="grid-template-columns:1fr;margin-bottom:10px">
+              <div>
+                <div class="row3">
+                  ${field("文案", "navLinks."+i+".label", link.label)}
+                  ${field("链接", "navLinks."+i+".href", link.href)}
+                  ${field("外链", "navLinks."+i+".external", !!link.external, { type: "checkbox" })}
+                </div>
+                <div class="item-actions">
+                  <button class="btn ghost sm" type="button" data-action="move-nav" data-i="${i}" data-dir="-1">上移</button>
+                  <button class="btn ghost sm" type="button" data-action="move-nav" data-i="${i}" data-dir="1">下移</button>
+                  <button class="btn danger sm" type="button" data-action="del-nav" data-i="${i}">删除</button>
+                </div>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function renderHero() {
+      const c = store.currentProject || {};
+      return `
+        <div class="card item">
+          <div class="thumb-wrap">
+            ${thumb(c.image)}
+            <span class="chip">Hero 预览图</span>
+          </div>
+          <div>
+            <div class="section-head"><h2>当前项目（Hero）</h2></div>
+            ${field("标题", "currentProject.title", c.title)}
+            ${field("描述", "currentProject.description", c.description, { type: "textarea" })}
+            <div class="row3">
+            ${field("版本", "currentProject.version", c.version)}
+            ${field("状态", "currentProject.state", c.state)}
+            ${field("链接", "currentProject.url", c.url)}
+            </div>
+            ${imageField("封面图", "currentProject.image", c.image, "projects")}
+            <p class="hint">可本地上传，或手动填 /projects/xxx.png</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderAbout() {
+      return `
+        <div class="card list-lines">
+          <div class="section-head"><h2>关于</h2><span class="chip">每行一段</span></div>
+          ${field("段落", "aboutParagraphs", (store.aboutParagraphs || []).join("\n"), { type: "textarea", rows: 8 })}
+        </div>
+        <div class="card list-lines">
+          <div class="section-head"><h2>NOW</h2><span class="chip">每行一条</span></div>
+          ${field("清单", "nowItems", (store.nowItems || []).join("\n"), { type: "textarea", rows: 6 })}
+        </div>
+      `;
+    }
+
+    function renderProjects() {
+      return `
+        <div class="section-head">
+          <h2>精选作品 <span class="chip">${store.projects.length} 项</span></h2>
+          <button class="btn ghost sm" type="button" data-action="add-project">+新建作品</button>
+        </div>
+        ${store.projects.map((p, i) => `
+          <div class="card item">
+            <div class="thumb-wrap">
+              ${thumb(p.image)}
+              ${imageField("封面图", "projects."+i+".image", p.image, "projects")}
+            </div>
+            <div>
+              <div class="row">
+                ${field("标题", "projects."+i+".title", p.title)}
+                ${field("分类", "projects."+i+".category", p.category)}
+              </div>
+              ${field("描述", "projects."+i+".description", p.description, { type: "textarea" })}
+              <div class="row3">
+                ${field("状态", "projects."+i+".status", p.status, { type: "select", options: STATUS })}
+                ${field("日期", "projects."+i+".date", p.date)}
+                ${field("序号", "projects."+i+".index", p.index)}
+              </div>
+              <div class="row">
+                ${field("链接", "projects."+i+".url", p.url || "")}
+                ${field("GitHub", "projects."+i+".github", p.github || "")}
+              </div>
+              ${field("标签（逗号分隔）", "projects."+i+".tags", (p.tags || []).join(", "))}
+              ${galleryField("图集", "projects."+i+".images", p.images || [], "projects")}
+              <div class="row">
+                ${field("ID", "projects."+i+".id", p.id)}
+                ${field("首页展示", "projects."+i+".featured", !!p.featured, { type: "checkbox" })}
+              </div>
+              <div class="item-actions">
+                <button class="btn ghost sm" type="button" data-action="move-project" data-i="${i}" data-dir="-1">上移</button>
+                <button class="btn ghost sm" type="button" data-action="move-project" data-i="${i}" data-dir="1">下移</button>
+                <button class="btn danger sm" type="button" data-action="del-project" data-i="${i}">删除</button>
+              </div>
+            </div>
+          </div>
+        `).join("")}
+      `;
+    }
+
+    function renderCommissions() {
+      return `
+        <div class="card">
+          ${field("接单周期", "commissionPeriod", store.commissionPeriod)}
+        </div>
+        <div class="section-head">
+          <h2>交付项目 <span class="chip">${store.commissions.length} 项</span></h2>
+          <button class="btn ghost sm" type="button" data-action="add-commission">+新建交付</button>
+        </div>
+        ${store.commissions.map((c, i) => `
+          <div class="card item">
+            <div class="thumb-wrap">
+              ${thumb(c.image)}
+              ${imageField("封面图", "commissions."+i+".image", c.image, "commissions")}
+            </div>
+            <div>
+              <div class="row">
+                ${field("标题", "commissions."+i+".title", c.title)}
+                ${field("类型", "commissions."+i+".kind", c.kind, { type: "select", options: KINDS })}
+              </div>
+              ${field("类型文案", "commissions."+i+".kindLabel", c.kindLabel)}
+              ${field("描述", "commissions."+i+".description", c.description, { type: "textarea" })}
+              <div class="row3">
+                ${field("状态", "commissions."+i+".status", c.status, { type: "select", options: STATUS })}
+                ${field("日期", "commissions."+i+".date", c.date)}
+                ${field("数量文案", "commissions."+i+".countLabel", c.countLabel || "")}
+              </div>
+              <div class="row">
+                ${field("链接", "commissions."+i+".url", c.url || "")}
+                ${field("标签（逗号分隔）", "commissions."+i+".tags", (c.tags || []).join(", "))}
+              </div>
+              ${galleryField("图集", "commissions."+i+".images", c.images || [], "commissions")}
+              <div class="row">
+                ${field("ID", "commissions."+i+".id", c.id)}
+                ${field("首页展示", "commissions."+i+".featured", !!c.featured, { type: "checkbox" })}
+              </div>
+              <div class="item-actions">
+                <button class="btn ghost sm" type="button" data-action="move-commission" data-i="${i}" data-dir="-1">上移</button>
+                <button class="btn ghost sm" type="button" data-action="move-commission" data-i="${i}" data-dir="1">下移</button>
+                <button class="btn danger sm" type="button" data-action="del-commission" data-i="${i}">删除</button>
+              </div>
+            </div>
+          </div>
+        `).join("")}
+      `;
+    }
+
+    function renderLab() {
+      return `
+        <div class="section-head">
+          <h2>LAB <span class="chip">${store.experiments.length}</span></h2>
+          <button class="btn ghost sm" type="button" data-action="add-lab">+新建实验</button>
+        </div>
+        ${store.experiments.map((e, i) => `
+          <div class="card">
+            <div class="row3">
+              ${field("编号", "experiments."+i+".labNumber", e.labNumber)}
+              ${field("标题", "experiments."+i+".title", e.title)}
+              ${field("状态", "experiments."+i+".status", e.status, { type: "select", options: STATUS })}
+            </div>
+            ${field("描述", "experiments."+i+".description", e.description, { type: "textarea", rows: 2 })}
+            <div class="row3">
+              ${field("日期", "experiments."+i+".date", e.date)}
+              ${field("技术（逗号分隔）", "experiments."+i+".technology", (e.technology || []).join(", "))}
+              ${field("ID", "experiments."+i+".id", e.id)}
+            </div>
+            <div class="item-actions">
+              <button class="btn ghost sm" type="button" data-action="move-lab" data-i="${i}" data-dir="-1">上移</button>
+              <button class="btn ghost sm" type="button" data-action="move-lab" data-i="${i}" data-dir="1">下移</button>
+              <button class="btn danger sm" type="button" data-action="del-lab" data-i="${i}">删除</button>
+            </div>
+          </div>
+        `).join("")}
+      `;
+    }
+
+    function renderLogs() {
+      return `
+        <div class="section-head">
+          <h2>构建日志 <span class="chip">${store.logs.length}</span></h2>
+          <button class="btn ghost sm" type="button" data-action="add-log">+新建日志</button>
+        </div>
+        ${store.logs.map((log, i) => `
+          <div class="card">
+            <div class="row3">
+              ${field("类型", "logs."+i+".type", log.type)}
+              ${field("编号", "logs."+i+".number", log.number)}
+              ${field("日期", "logs."+i+".date", log.date)}
+            </div>
+            ${field("标题", "logs."+i+".title", log.title)}
+            <div class="row">
+              ${field("链接", "logs."+i+".href", log.href || "#logs")}
+              ${field("ID", "logs."+i+".id", log.id)}
+            </div>
+            <div class="item-actions">
+              <button class="btn ghost sm" type="button" data-action="move-log" data-i="${i}" data-dir="-1">上移</button>
+              <button class="btn ghost sm" type="button" data-action="move-log" data-i="${i}" data-dir="1">下移</button>
+              <button class="btn danger sm" type="button" data-action="del-log" data-i="${i}">删除</button>
+            </div>
+          </div>
+        `).join("")}
+      `;
+    }
+
+    function collectFromDom() {
+      const next = structuredClone(store);
+      document.querySelectorAll("[data-path]").forEach((el) => {
+        const path = el.dataset.path;
+        let value;
+        if (el.type === "checkbox") value = el.checked;
+        else value = el.value;
+
+        if (path === "aboutParagraphs" || path === "nowItems") {
+          value = String(value).split("\n").map((x) => x.trim()).filter(Boolean);
+        } else if (/\.tags$/.test(path) || /\.technology$/.test(path)) {
+          value = String(value).split(",").map((x) => x.trim()).filter(Boolean);
+        } else if (/\.images$/.test(path)) {
+          value = String(value).split("\n").map((x) => x.trim()).filter(Boolean);
+        }
+
+        setByPath(next, path, value);
+      });
+
+      // sync kindLabel from kind when empty-ish
+      (next.commissions || []).forEach((c) => {
+        const hit = KINDS.find((k) => k.id === c.kind);
+        if (hit && (!c.kindLabel || KINDS.some((k) => k.label === c.kindLabel))) {
+          c.kindLabel = hit.label;
+        }
+      });
+      return next;
+    }
+
+    function setByPath(obj, path, value) {
+      const parts = path.split(".");
+      let cur = obj;
+      for (let i = 0; i < parts.length - 1; i++) {
+        const key = parts[i];
+        const nextKey = parts[i + 1];
+        const isIndex = /^\d+$/.test(nextKey);
+        if (cur[key] == null) cur[key] = isIndex ? [] : {};
+        cur = cur[key];
+      }
+      cur[parts[parts.length - 1]] = value;
+    }
+
+    function moveItem(arr, i, dir) {
+      const j = i + dir;
+      if (j < 0 || j >= arr.length) return;
+      const t = arr[i];
+      arr[i] = arr[j];
+      arr[j] = t;
+    }
+
+    function uid(prefix) {
+      return prefix + "-" + Date.now().toString(36).slice(-6);
+    }
+
+    function handleAction(e) {
+      const btn = e.target.closest("[data-action]");
+      if (!btn) return;
+      store = collectFromDom();
+      const action = btn.dataset.action;
+      const i = Number(btn.dataset.i);
+      const dir = Number(btn.dataset.dir || 0);
+
+      if (action === "add-project") {
+        store.projects.unshift({
+          id: uid("project"), title: "新作品", category: "分类",
+          description: "", image: "/projects/placeholder.png", images: [],
+          tags: [], status: "BUILDING", date: "2026", featured: true, index: String(store.projects.length + 1).padStart(2, "0"),
+        });
+      }
+      if (action === "del-project") store.projects.splice(i, 1);
+      if (action === "move-project") moveItem(store.projects, i, dir);
+
+      if (action === "add-commission") {
+        store.commissions.push({
+          id: uid("commission"), title: "新交付", kind: "campus", kindLabel: "校园单",
+          description: "", image: "/commissions/placeholder.png", images: [],
+          tags: [], status: "CLIENT", date: "2026", featured: true,
+        });
+      }
+      if (action === "del-commission") store.commissions.splice(i, 1);
+      if (action === "move-commission") moveItem(store.commissions, i, dir);
+
+      if (action === "add-lab") {
+        store.experiments.unshift({
+          id: uid("lab"), labNumber: String(store.experiments.length + 1).padStart(3, "0"),
+          title: "新实验", description: "", status: "EXPERIMENT", date: "2026", technology: [],
+        });
+      }
+      if (action === "del-lab") store.experiments.splice(i, 1);
+      if (action === "move-lab") moveItem(store.experiments, i, dir);
+
+      if (action === "add-log") {
+        store.logs.unshift({
+          id: uid("log"), type: "构建日志", number: String(store.logs.length + 1).padStart(3, "0"),
+          title: "新日志", date: new Date().toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" }).replace(/(\d+)\/(\d+)\/(\d+)/, "$1.$2.$3"),
+          href: "#logs",
+        });
+      }
+      if (action === "del-log") store.logs.splice(i, 1);
+      if (action === "move-log") moveItem(store.logs, i, dir);
+
+      if (action === "add-nav") store.navLinks.push({ label: "新链接", href: "#", external: false });
+      if (action === "del-nav") store.navLinks.splice(i, 1);
+      if (action === "move-nav") moveItem(store.navLinks, i, dir);
+
+      render();
+    }
+
+    function render() {
+      renderTabs();
+      const map = {
+        site: renderSite,
+        hero: renderHero,
+        about: renderAbout,
+        projects: renderProjects,
+        commissions: renderCommissions,
+        lab: renderLab,
+        logs: renderLogs,
+      };
+      $("panels").innerHTML = (map[activeTab] || renderSite)();
+      $("panels").querySelectorAll(".card.item").forEach((card) => {
+        const img = card.querySelector("img.thumb");
+        const input = card.querySelector('input[data-path$=".image"]');
+        if (img && input) {
+          input.addEventListener("input", () => {
+            img.src = input.value || "";
+            img.style.opacity = "1";
+          });
+        }
+      });
+      bindUploads($("panels"));
+      $("panels").onclick = handleAction;
+    }
+
+    async function load() {
+      setMsg("加载中…");
+      const res = await fetch("/api/content", { cache: "no-store" });
+      store = await res.json();
+      setMsg("");
+      render();
+    }
+
+    async function save() {
+      try {
+        store = collectFromDom();
+        setMsg("保存中…");
+        const res = await fetch("/api/admin/content", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ store }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "保存失败");
+        setMsg("已保存，刷新前台即可", "ok");
+      } catch (err) {
+        setMsg(err.message || "保存失败", "err");
+      }
+    }
+
+    $("btnSave").onclick = save;
+    $("btnReload").onclick = load;
+    load();
+  </script>
+</body>
+</html>

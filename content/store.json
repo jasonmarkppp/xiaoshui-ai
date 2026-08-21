@@ -1,0 +1,710 @@
+{
+  "site": {
+    "name": "小氵AI",
+    "tagline": "用 AI，把想法做成真正能用的东西。",
+    "taglineLines": [
+      "用 AI，把想法做成",
+      "真正能用的东西。"
+    ],
+    "english": "AI Builder · Full Stack · Creative Web · Three.js",
+    "title": "小氵AI — AI Builder & Indie Maker",
+    "description": "用 AI 把想法做成真正能用的东西。做产品、接全栈与创意网页交付，也做 Three.js 与真实上线项目。",
+    "url": "https://xiaoshui.ai",
+    "email": "15916177349@163.com",
+    "github": "https://github.com/jasonmarkppp",
+    "bilibili": "https://space.bilibili.com/2004976748",
+    "xiaohongshu": "https://www.xiaohongshu.com/user/profile/6731f97c000000001c019adc",
+    "basedIn": "广东，中国",
+    "currently": "AI 产品 · 全栈交付 · 创意网页",
+    "interestedIn": "AI / 全栈 / 创意网页 / Three.js / 内容",
+    "lastUpdated": "AUG 2026"
+  },
+  "aboutParagraphs": [
+    "我喜欢把突然想到的东西真正做出来。",
+    "不只是前端页面——也做全栈、创意网页和 Three.js 交互站点；2026 年 1 月到现在，一边做自己的 AI 产品，一边给学生、小店和企业交付真实上线的项目。",
+    "AI 对我来说不是答案，而是一个把想法快速变成现实的工具。",
+    "我也把这些过程记录下来。"
+  ],
+  "nowItems": [
+    "小氵AI 数字工作台",
+    "小氵工具箱",
+    "Bilibili Digest",
+    "全栈 / 创意网页 / Three.js 交付"
+  ],
+  "navLinks": [
+    {
+      "label": "作品",
+      "href": "#work"
+    },
+    {
+      "label": "交付",
+      "href": "#commissioned"
+    },
+    {
+      "label": "实验室",
+      "href": "#lab"
+    },
+    {
+      "label": "日志",
+      "href": "#logs"
+    },
+    {
+      "label": "关于",
+      "href": "#about"
+    },
+    {
+      "label": "GITHUB",
+      "href": "https://github.com/jasonmarkppp",
+      "external": true
+    }
+  ],
+  "currentProject": {
+    "title": "小氵AI 数字工作台",
+    "description": "正在搭建的个人主页：一边做产品，一边公开记录过程。",
+    "version": "V0.1",
+    "state": "开发中",
+    "image": "/projects/current.png",
+    "url": "#top"
+  },
+  "projects": [
+    {
+      "id": "nextstep-ai",
+      "title": "NextStep AI",
+      "category": "AI 升学规划",
+      "description": "AI 驱动的升学决策平台：学生画像、院校匹配、冲稳保志愿表、AI 对话顾问与直播查分账号体系。",
+      "image": "/projects/nextstep-workbench.png",
+      "images": [
+        "/projects/nextstep-workbench.png",
+        "/projects/nextstep-wishlist.png",
+        "/projects/nextstep-match.png",
+        "/projects/nextstep-filter.png",
+        "/projects/nextstep-chat.png",
+        "/projects/nextstep-live-admin.png",
+        "/projects/nextstep-login.png"
+      ],
+      "tags": [
+        "AI",
+        "升学",
+        "全栈",
+        "SaaS"
+      ],
+      "status": "BUILDING",
+      "date": "2026",
+      "featured": true,
+      "index": "01"
+    },
+    {
+      "id": "bilibili-digest",
+      "title": "Bilibili Digest",
+      "category": "浏览器插件",
+      "description": "给 B 站视频做 AI 总结的浏览器扩展，支持字幕、概览与笔记。",
+      "image": "/projects/bilibili-digest.png",
+      "tags": [
+        "Edge",
+        "Chrome",
+        "AI",
+        "开源"
+      ],
+      "status": "BUILDING",
+      "date": "2026-08",
+      "url": "https://github.com/jasonmarkppp/bilibili-digest",
+      "github": "https://github.com/jasonmarkppp/bilibili-digest",
+      "featured": true,
+      "index": "02"
+    },
+    {
+      "id": "xiaoshui-toolbox",
+      "title": "小氵工具箱",
+      "category": "在线工具箱",
+      "description": "轻量高效的在线工具箱：外贸核算、数据清洗、邮箱提取、HTML 预览与图片处理，核心数据本地处理。",
+      "image": "/projects/xiaoshui-toolbox.png",
+      "tags": [
+        "外贸",
+        "数据处理",
+        "本地处理",
+        "Web"
+      ],
+      "status": "SHIPPED",
+      "date": "2026",
+      "url": "https://xiaoshui-tool.netlify.app/",
+      "featured": true,
+      "index": "03"
+    },
+    {
+      "id": "lan-vote-system",
+      "title": "局域网分组投票",
+      "category": "教学工具",
+      "description": "无外网机房可用的分组投票：老师本机一键启动，学生同网投票，大屏实时统计，无需数据库。",
+      "image": "/projects/lan-vote-board.png",
+      "images": [
+        "/projects/lan-vote-board.png",
+        "/projects/lan-vote-create.png"
+      ],
+      "tags": [
+        "FastAPI",
+        "WebSocket",
+        "局域网",
+        "开源"
+      ],
+      "status": "OPEN SOURCE",
+      "date": "2025",
+      "url": "https://github.com/jasonmarkppp/lan-vote-system",
+      "github": "https://github.com/jasonmarkppp/lan-vote-system",
+      "featured": true,
+      "index": "04"
+    },
+    {
+      "id": "lab-report-system",
+      "title": "实验报告评价系统",
+      "category": "教学系统",
+      "description": "中小学实验报告评价系统（SpringBoot + Vue3）：师生班级、实验项目与评分标准，支持 AI 智能分析报告与数据总览。",
+      "image": "/projects/lab-report-admin.png",
+      "tags": [
+        "SpringBoot",
+        "Vue3",
+        "教务",
+        "AI"
+      ],
+      "status": "OPEN SOURCE",
+      "date": "2025",
+      "url": "https://github.com/jasonmarkppp/charge-system",
+      "github": "https://github.com/jasonmarkppp/charge-system",
+      "featured": true,
+      "index": "05"
+    },
+    {
+      "id": "christmas-tree-3d",
+      "title": "3D 手势交互圣诞树",
+      "category": "Three.js",
+      "description": "浏览器里的 3D 圣诞场景：手势握拳聚合、左右旋转、指向放大，支持插入照片。",
+      "image": "/projects/christmas-tree-3d.png",
+      "tags": [
+        "Three.js",
+        "手势交互",
+        "创意网页"
+      ],
+      "status": "SHIPPED",
+      "date": "2026",
+      "url": "https://chrtismastree.netlify.app/",
+      "featured": true,
+      "index": "06"
+    },
+    {
+      "id": "realshot-director",
+      "title": "RealShot Director",
+      "category": "AI 工具",
+      "description": "用自然语言描述画面，自动生成结构化、更有真人感的视频 Prompt。",
+      "image": "/projects/realshot.png",
+      "tags": [
+        "AI",
+        "Prompt",
+        "网页工具"
+      ],
+      "status": "SHIPPED",
+      "date": "2026-07",
+      "url": "https://realshot-director.netlify.app/",
+      "featured": true,
+      "index": "07"
+    },
+    {
+      "id": "html-launch",
+      "title": "HTML Launch",
+      "category": "开发者工具",
+      "description": "把静态 HTML / 网页文件夹一键部署成可访问链接，方便交付与演示。",
+      "image": "/projects/html-launch.png",
+      "tags": [
+        "Cloudflare",
+        "Workers",
+        "开发工具"
+      ],
+      "status": "OPEN SOURCE",
+      "date": "2026-06",
+      "url": "https://html-launch-kv.xiaoshui123.workers.dev/",
+      "featured": true,
+      "index": "08"
+    },
+    {
+      "id": "workshop",
+      "title": "小氵AI 数字工作台",
+      "category": "个人站点",
+      "description": "公开的个人数字工作台：产品、实验、接单交付与开发日志。",
+      "image": "/projects/current.png",
+      "tags": [
+        "Next.js",
+        "个人品牌",
+        "公开构建"
+      ],
+      "status": "BUILDING",
+      "date": "2026-08",
+      "url": "#top",
+      "featured": true,
+      "index": "09"
+    }
+  ],
+  "commissions": [
+    {
+      "id": "campus-series",
+      "title": "校园系列",
+      "kind": "series",
+      "kindLabel": "校园单",
+      "description": "2026 年 1 月至今，给学生和社团交付的真实上线项目：前端、全栈、创意网页与 Three.js 互动站，含点歌、作品集、活动页等。大部分经闲鱼交付。",
+      "image": "/commissions/campus-series.png",
+      "images": [
+        "/commissions/campus/qingge-playlist.png",
+        "/commissions/campus/pet-infographic.png",
+        "/commissions/campus/yan-design.png",
+        "/commissions/campus/wuyi-tea.png",
+        "/commissions/campus/mingli-viz.png",
+        "/commissions/campus/maja-lemon.png",
+        "/commissions/campus/design-course.png",
+        "/commissions/scl90-kami.png",
+        "/commissions/campus/birthday-airline.png",
+        "/commissions/campus/3d-card.png",
+        "/commissions/sanxingdui-home.png",
+        "/commissions/sanxingdui-relic.png",
+        "/commissions/campus/yunjian.png",
+        "/commissions/campus/newyear-fortune.png",
+        "/commissions/campus/ai-museum.png",
+        "/commissions/libai-map.png",
+        "/commissions/libai-explore.png",
+        "/commissions/3d-show.png",
+        "/commissions/oil-paper-umbrella.png",
+        "/commissions/lipu-home.png",
+        "/commissions/shinchan-home.png"
+      ],
+      "tags": [
+        "全栈",
+        "创意网页",
+        "Three.js",
+        "闲鱼"
+      ],
+      "status": "SHIPPED",
+      "date": "2026.01 — 2026.08",
+      "countLabel": "20+ 个项目",
+      "featured": true
+    },
+    {
+      "id": "playlist-kaguya",
+      "title": "直播点歌站",
+      "kind": "campus",
+      "kindLabel": "校园单",
+      "description": "直播间点歌 / 歌单互动站，支持搜索、随机、弹幕模式。",
+      "image": "/projects/playlist.png",
+      "tags": [
+        "点歌",
+        "全栈",
+        "互动"
+      ],
+      "status": "CLIENT",
+      "date": "2026",
+      "url": "https://kaguya.ink/",
+      "featured": true
+    },
+    {
+      "id": "campus-portfolio",
+      "title": "个人作品集网站",
+      "kind": "campus",
+      "kindLabel": "作品集",
+      "description": "客户个人站：自我介绍、精选作品与作品归档，覆盖摄影、广告策划与创意媒体展示，新粗野主义视觉风格。",
+      "image": "/commissions/campus-portfolio.png",
+      "images": [
+        "/commissions/portfolio-hero.png",
+        "/commissions/portfolio-works.png",
+        "/commissions/portfolio-gallery.png"
+      ],
+      "tags": [
+        "作品集",
+        "创意网页",
+        "个人站"
+      ],
+      "status": "CLIENT",
+      "date": "2026",
+      "url": "https://saibo-design.netlify.app/",
+      "featured": true
+    },
+    {
+      "id": "small-landing",
+      "title": "卡密小测试站",
+      "kind": "small-site",
+      "kindLabel": "小网站",
+      "description": "心理量表 / 小测试站点（如 SCL-90），支持卡密核销后进入作答，适合轻量交付与运营。",
+      "image": "/commissions/scl90-kami.png",
+      "tags": [
+        "卡密",
+        "小测试",
+        "表单"
+      ],
+      "status": "CLIENT",
+      "date": "2026",
+      "url": "https://health-psy.netlify.app/",
+      "featured": true
+    },
+    {
+      "id": "sanxingdui",
+      "title": "三星堆数字场景",
+      "kind": "campus",
+      "kindLabel": "创意网页",
+      "description": "古蜀文明数字展示站：精选文物、3D 文物查看、场景编辑、虚拟展厅与互动体验，毕业设计级交付。",
+      "image": "/commissions/sanxingdui-home.png",
+      "images": [
+        "/commissions/sanxingdui-home.png",
+        "/commissions/sanxingdui-relic.png"
+      ],
+      "tags": [
+        "三星堆",
+        "3D",
+        "虚拟展厅",
+        "创意网页"
+      ],
+      "status": "CLIENT",
+      "date": "2026",
+      "url": "https://san-xin-dui.netlify.app/",
+      "featured": true
+    },
+    {
+      "id": "libai-poetic-gis",
+      "title": "李白诗歌时空地图",
+      "kind": "campus",
+      "kindLabel": "创意网页",
+      "description": "以地图叙事李白行迹与诗作：交互节点、时空连线与诗意界面，把地理与诗歌编成可探索的数字长卷。",
+      "image": "/commissions/libai-map.png",
+      "images": [
+        "/commissions/libai-map.png",
+        "/commissions/libai-explore.png"
+      ],
+      "tags": [
+        "李白",
+        "地图叙事",
+        "交互可视化",
+        "创意网页"
+      ],
+      "status": "CLIENT",
+      "date": "2026",
+      "url": "https://li-ba-final.netlify.app/",
+      "featured": true
+    },
+    {
+      "id": "birthday-airline",
+      "title": "写给你的生日航线",
+      "kind": "campus",
+      "kindLabel": "创意网页",
+      "description": "沉浸式生日互动站：花影、航线与谜题串联成一段只属于对方的记忆航程。",
+      "image": "/commissions/campus/birthday-airline.png",
+      "tags": [
+        "创意网页",
+        "互动叙事",
+        "生日"
+      ],
+      "status": "CLIENT",
+      "date": "2026",
+      "url": "https://happybirthday-0811.netlify.app/",
+      "featured": true
+    },
+    {
+      "id": "3d-card",
+      "title": "3D 贺卡 · 我们的小屋",
+      "kind": "campus",
+      "kindLabel": "创意网页",
+      "description": "可探索的 3D 房间贺卡：点击热点解锁回忆，镜头漫游与互动问答。",
+      "image": "/commissions/campus/3d-card.png",
+      "tags": [
+        "Three.js",
+        "3D 贺卡",
+        "互动探索"
+      ],
+      "status": "CLIENT",
+      "date": "2026",
+      "url": "https://3d-card-5.netlify.app/",
+      "featured": true
+    },
+    {
+      "id": "3d-show",
+      "title": "3D 模型展厅",
+      "kind": "campus",
+      "kindLabel": "创意网页",
+      "description": "轻量 3D 模型展厅：切换模型、拖拽旋转、自动旋转与全屏查看，适合作品展示与交付演示。",
+      "image": "/commissions/3d-show.png",
+      "tags": [
+        "Three.js",
+        "3D 展厅",
+        "创意网页"
+      ],
+      "status": "CLIENT",
+      "date": "2026",
+      "url": "https://3d-show-1.netlify.app/",
+      "featured": true
+    },
+    {
+      "id": "oil-paper-umbrella",
+      "title": "苏州油纸伞",
+      "kind": "campus",
+      "kindLabel": "创意网页",
+      "description": "非遗主题展示站：经典款式、制作工艺、品牌定制与留言表单，传统视觉与落地页结构结合。",
+      "image": "/commissions/oil-paper-umbrella.png",
+      "tags": [
+        "非遗",
+        "主题站",
+        "创意网页"
+      ],
+      "status": "CLIENT",
+      "date": "2026",
+      "url": "https://github.com/jasonmarkppp/Oil-paper-umbrella",
+      "featured": true
+    },
+    {
+      "id": "lipu-friends",
+      "title": "暹罗厘普 · LIPU FRIENDS",
+      "kind": "campus",
+      "kindLabel": "主题站",
+      "description": "国产卡通 IP 主题站：首页宇宙、角色档案、周边与联名入口，粗野可爱视觉，适合 IP 展示与源码交付。",
+      "image": "/commissions/lipu-home.png",
+      "images": [
+        "/commissions/lipu-home.png",
+        "/commissions/lipu-characters.png"
+      ],
+      "tags": [
+        "IP 主题",
+        "角色站",
+        "创意网页"
+      ],
+      "status": "CLIENT",
+      "date": "2026",
+      "url": "https://github.com/jasonmarkppp/LIPU-FRIENDS-ip-web",
+      "featured": true
+    },
+    {
+      "id": "shinchan-land",
+      "title": "蜡笔小新乐园",
+      "kind": "campus",
+      "kindLabel": "主题站",
+      "description": "蜡笔小新主题站：角色介绍、经典剧集、画廊与周边模块，粉黄活泼视觉，可演示 / 源码交付。",
+      "image": "/commissions/shinchan-home.png",
+      "images": [
+        "/commissions/shinchan-home.png",
+        "/commissions/shinchan-characters.png"
+      ],
+      "tags": [
+        "主题站",
+        "IP",
+        "创意网页"
+      ],
+      "status": "CLIENT",
+      "date": "2026",
+      "url": "https://lambent-fox-1e3b80.netlify.app/",
+      "featured": true
+    },
+    {
+      "id": "small-tool-site",
+      "title": "夏至电竞 · 陪玩入职申请",
+      "kind": "small-site",
+      "kindLabel": "小网站",
+      "description": "陪玩入职申请表单站，提交后同步到飞书多维表格，方便后台审核与联系。",
+      "image": "/commissions/xiazhi-onboarding.png",
+      "tags": [
+        "表单",
+        "飞书",
+        "全栈"
+      ],
+      "status": "CLIENT",
+      "date": "2026",
+      "url": "https://feishu-onboarding-1.netlify.app/",
+      "featured": true
+    },
+    {
+      "id": "enterprise-intro",
+      "title": "芯研算",
+      "kind": "enterprise",
+      "kindLabel": "企业站",
+      "description": "科研服务平台企业站：模拟计算、实验检测、论文服务与会员体系，含登录注册与需求沟通流程。",
+      "image": "/commissions/enterprise.png",
+      "images": [
+        "/commissions/xinyansuan-sim.png",
+        "/commissions/xinyansuan-login.png",
+        "/commissions/xinyansuan-contact.png"
+      ],
+      "tags": [
+        "企业站",
+        "全栈",
+        "平台"
+      ],
+      "status": "CLIENT",
+      "date": "2026",
+      "url": "https://xinyansuan.com",
+      "featured": true
+    },
+    {
+      "id": "victoria-harbour",
+      "title": "维港集团",
+      "kind": "enterprise",
+      "kindLabel": "企业站",
+      "description": "香港身份规划与置业顾问企业站：顾问预约、精选房源、服务体系与内容获客，面向内地及全球客户。",
+      "image": "/commissions/victoria-harbour-hero.png",
+      "images": [
+        "/commissions/victoria-harbour-hero.png",
+        "/commissions/victoria-harbour-about.png"
+      ],
+      "tags": [
+        "企业站",
+        "地产",
+        "身份规划"
+      ],
+      "status": "CLIENT",
+      "date": "2026",
+      "url": "https://victoria-harbour.netlify.app/",
+      "featured": true
+    },
+    {
+      "id": "crmeb-mall",
+      "title": "H5 + 商城系统（CRMEB 二开）",
+      "kind": "commerce",
+      "kindLabel": "电商业务",
+      "description": "基于 CRMEB 的完整商城闭环：H5 端 + 后台订单/商品/用户，短周期二开交付上线。",
+      "image": "/commissions/crmeb-orders.png",
+      "tags": [
+        "CRMEB",
+        "二开",
+        "H5",
+        "商城"
+      ],
+      "status": "CLIENT",
+      "date": "2026",
+      "featured": true
+    },
+    {
+      "id": "commerce-biz",
+      "title": "时屿网络",
+      "kind": "commerce",
+      "kindLabel": "电商业务",
+      "description": "电商客服外包介绍站：全平台全链路服务、资费标准、目标客户与合作品牌展示。",
+      "image": "/commissions/commerce.png",
+      "images": [
+        "/commissions/shiyu-hero.png",
+        "/commissions/shiyu-platforms.png"
+      ],
+      "tags": [
+        "电商外包",
+        "介绍站",
+        "B2B"
+      ],
+      "status": "CLIENT",
+      "date": "2026",
+      "url": "https://shi-yi.netlify.app/",
+      "featured": true
+    }
+  ],
+  "commissionFilters": [
+    {
+      "id": "all",
+      "label": "全部"
+    },
+    {
+      "id": "campus",
+      "label": "校园单"
+    },
+    {
+      "id": "small-site",
+      "label": "小网站"
+    },
+    {
+      "id": "enterprise",
+      "label": "企业站"
+    },
+    {
+      "id": "commerce",
+      "label": "电商业务"
+    }
+  ],
+  "commissionPeriod": "2026.01 — 2026.08",
+  "experiments": [
+    {
+      "id": "014",
+      "labNumber": "014",
+      "title": "Prompt 对比查看器",
+      "description": "把多版 Prompt 并排对比，上线前看清改了什么。",
+      "status": "EXPERIMENT",
+      "date": "2026.08.12",
+      "technology": [
+        "Next.js",
+        "TypeScript"
+      ]
+    },
+    {
+      "id": "013",
+      "labNumber": "013",
+      "title": "本地截图标注工具",
+      "description": "在浏览器里直接给产品截图做标注，不用来回切软件。",
+      "status": "BUILDING",
+      "date": "2026.08.05",
+      "technology": [
+        "Canvas",
+        "Web"
+      ]
+    },
+    {
+      "id": "012",
+      "labNumber": "012",
+      "title": "迷你更新日志组件",
+      "description": "给独立产品页嵌入可更新的 changelog 小部件。",
+      "status": "SHIPPED",
+      "date": "2026.07.28",
+      "technology": [
+        "Workers",
+        "JSON"
+      ]
+    },
+    {
+      "id": "011",
+      "labNumber": "011",
+      "title": "AI Commit 叙述器",
+      "description": "把杂乱 commit 整理成可读的构建说明。",
+      "status": "ARCHIVED",
+      "date": "2026.07.14",
+      "technology": [
+        "CLI",
+        "LLM"
+      ]
+    }
+  ],
+  "logs": [
+    {
+      "id": "023",
+      "type": "个人经历",
+      "number": "023",
+      "title": "从 Gemini 粒子到闲鱼接单：我的 2025.12 — 2026.08",
+      "date": "08.21.2026",
+      "href": "#logs"
+    },
+    {
+      "id": "022",
+      "type": "技术栈",
+      "number": "022",
+      "title": "Cursor / GPT / Gemini 与提示词站：我的工具栈",
+      "date": "08.21.2026",
+      "href": "#logs"
+    },
+    {
+      "id": "021",
+      "type": "构建日志",
+      "number": "021",
+      "title": "我把 YouTube Digest 改成了 B 站版本",
+      "date": "08.13.2026",
+      "href": "#logs"
+    },
+    {
+      "id": "020",
+      "type": "现场笔记",
+      "number": "020",
+      "title": "不会编程的人，到底应该怎么使用 AI 编程？",
+      "date": "08.10.2026",
+      "href": "#logs"
+    },
+    {
+      "id": "019",
+      "type": "项目笔记",
+      "number": "019",
+      "title": "从一个想法到真正上线的网站",
+      "date": "08.08.2026",
+      "href": "#logs"
+    }
+  ]
+}

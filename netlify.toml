@@ -1,0 +1,21 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Netlify auto-detects Next.js and applies the OpenNext adapter.
+# Do not pin @netlify/plugin-nextjs unless you need a specific version.
+
+[[headers]]
+  for = "/admin.html"
+  [headers.values]
+    # Local CMS only — still publicly reachable; do not put secrets here.
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/api/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
